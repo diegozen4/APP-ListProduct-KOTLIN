@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.DefaultRetryPolicy
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductAdapter
     private lateinit var productList: MutableList<Product>
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private lateinit var queue: RequestQueue
 
@@ -36,6 +37,11 @@ class MainActivity : AppCompatActivity() {
         productList = mutableListOf()
         adapter = ProductAdapter(productList)
         recyclerView.adapter = adapter
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            fetchData()
+        }
 
         queue = Volley.newRequestQueue(this)
 
@@ -51,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val message = response.getString("mensaje")
                     if (message == "ok") {
+                        productList.clear() // Limpiar la lista antes de agregar nuevos productos
                         val productsArray = response.getJSONArray("response")
                         for (i in 0 until productsArray.length()) {
                             val productObj = productsArray.getJSONObject(i)
@@ -68,10 +75,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     Log.e("ErrorAPI", "Error al analizar la respuesta JSON: ${e.message}", e)
+                } finally {
+                    swipeRefreshLayout.isRefreshing = false // Detener la animación de swipe refresh
                 }
             },
             { error ->
                 Log.e("ErrorAPI", "Error al obtener datos: ${error.message}", error)
+                swipeRefreshLayout.isRefreshing = false // Detener la animación de swipe refresh en caso de error
             })
 
         queue.add(request)
