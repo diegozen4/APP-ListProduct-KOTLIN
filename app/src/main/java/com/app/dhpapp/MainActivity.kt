@@ -1,32 +1,21 @@
 package com.app.dhpapp
 
-import android.annotation.SuppressLint
-import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.json.JSONObject
+import com.app.dhpapp.adapter.ProductAdapter
+import com.app.dhpapp.viewmodel.ProductViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val BASE_URL = "http://10.0.2.2:5278" // Reemplaza la dirección IP con la de tu servidor
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductAdapter
-    private lateinit var productList: MutableList<Product>
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
-    private lateinit var queue: RequestQueue
+    private lateinit var viewModel: ProductViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,56 +23,18 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        productList = mutableListOf()
-        adapter = ProductAdapter(productList)
+        adapter = ProductAdapter(emptyList())
         recyclerView.adapter = adapter
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
-            fetchData()
+            viewModel.getProducts()
         }
 
-        queue = Volley.newRequestQueue(this)
-
-        fetchData()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun fetchData() {
-        val url = "$BASE_URL/api/Producto/Lista"
-
-        val request = JsonObjectRequest(Request.Method.GET, url, null,
-            { response ->
-                try {
-                    val message = response.getString("mensaje")
-                    if (message == "ok") {
-                        productList.clear() // Limpiar la lista antes de agregar nuevos productos
-                        val productsArray = response.getJSONArray("response")
-                        for (i in 0 until productsArray.length()) {
-                            val productObj = productsArray.getJSONObject(i)
-                            val product = Product(
-                                productObj.getInt("id_Producto"),
-                                productObj.getString("nombre"),
-                                productObj.getString("descripcion"),
-                                productObj.getDouble("precio")
-                            )
-                            productList.add(product)
-                        }
-                        adapter.notifyDataSetChanged()
-                    } else {
-                        Log.e("ErrorAPI", "Error al obtener datos: Mensaje no es 'ok'")
-                    }
-                } catch (e: Exception) {
-                    Log.e("ErrorAPI", "Error al analizar la respuesta JSON: ${e.message}", e)
-                } finally {
-                    swipeRefreshLayout.isRefreshing = false // Detener la animación de swipe refresh
-                }
-            },
-            { error ->
-                Log.e("ErrorAPI", "Error al obtener datos: ${error.message}", error)
-                swipeRefreshLayout.isRefreshing = false // Detener la animación de swipe refresh en caso de error
-            })
-
-        queue.add(request)
+        viewModel = ViewModelProvider(this)[ProductViewModel::class.java]
+        viewModel.productList.observe(this) { products ->
+            adapter.setData(products)
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 }
