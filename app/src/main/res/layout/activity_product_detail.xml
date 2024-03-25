@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/peces_compartamos">
 
     <!-- TextView para el nombre del producto -->
     <TextView
@@ -41,10 +42,10 @@
     <!-- ImageView para la imagen del producto -->
     <ImageView
         android:id="@+id/imageViewProduct"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_below="@id/textProductPrice"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:scaleType="centerInside"
         android:layout_centerHorizontal="true"/>
 
@@ -54,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewProduct"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:textStyle="bold"
         android:text="COMPRAR"
         android:backgroundTint="#FF0057"
