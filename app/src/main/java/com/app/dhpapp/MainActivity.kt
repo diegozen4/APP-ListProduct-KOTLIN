@@ -1,5 +1,6 @@
 package com.app.dhpapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -7,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.dhpapp.adapter.ProductAdapter
+import com.app.dhpapp.model.Product
 import com.app.dhpapp.viewmodel.ProductViewModel
+import java.io.Serializable
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductAdapter
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ProductAdapter(emptyList())
+        adapter = ProductAdapter(emptyList(), this)
         recyclerView.adapter = adapter
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
@@ -36,5 +39,11 @@ class MainActivity : AppCompatActivity() {
             adapter.setData(products)
             swipeRefreshLayout.isRefreshing = false
         }
+    }
+    override fun onProductClick(product: Product) {
+        val intent = Intent(this, ProductDetailActivity::class.java).apply {
+            putExtra("product", product as Serializable)
+        }
+        startActivity(intent)
     }
 }

@@ -8,8 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.dhpapp.R
 import com.app.dhpapp.model.Product
 
-class ProductAdapter(private var productList: List<Product>) :
+class ProductAdapter(private var productList: List<Product>, private val listener: OnProductClickListener) :
     RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+
+    interface OnProductClickListener {
+        fun onProductClick(product: Product)
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.textNombre)
@@ -28,11 +32,16 @@ class ProductAdapter(private var productList: List<Product>) :
         return ViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = productList[position]
         holder.nameTextView.text = product.name
         holder.descriptionTextView.text = product.description
         holder.priceTextView.text = "S/. ${product.price}"
+
+        holder.itemView.setOnClickListener {
+            listener.onProductClick(product)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -9,13 +9,13 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.app.dhpapp.BaseApi
 import com.app.dhpapp.model.Product
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
 
     private var appContext: Context? = application.applicationContext
 
-    private val BASE_URL = "http://10.0.2.2"
     private lateinit var queue: RequestQueue
 
     private val _productList = MutableLiveData<List<Product>>()
@@ -29,7 +29,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     fun getProducts() {
         appContext?.let { context ->
             queue = Volley.newRequestQueue(context)
-            val url = "$BASE_URL/apiDhp/GET_Products.php"
+            val url = "${BaseApi.BASE_URL}/apiDhp/GET_Products.php"
 
             val request = JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
