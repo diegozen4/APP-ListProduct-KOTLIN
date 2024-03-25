@@ -1,22 +1,15 @@
 package com.app.dhpapp.viewmodel
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import com.app.dhpapp.BaseApi
 import com.app.dhpapp.model.Product
+import com.app.dhpapp.repository.ProductRepository
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var appContext: Context? = application.applicationContext
-
-    private lateinit var queue: RequestQueue
+    private val repository: ProductRepository = ProductRepository(application)
 
     private val _productList = MutableLiveData<List<Product>>()
     val productList: LiveData<List<Product>>
@@ -27,37 +20,18 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun getProducts() {
-        appContext?.let { context ->
-            queue = Volley.newRequestQueue(context)
-            val url = "${BaseApi.BASE_URL}/apiDhp/GET_Products.php"
-
-            val request = JsonObjectRequest(Request.Method.GET, url, null,
-                { response ->
-                    val products = mutableListOf<Product>()
-                    val productsArray = response.getJSONArray("response")
-                    for (i in 0 until productsArray.length()) {
-                        val productObj = productsArray.getJSONObject(i)
-                        val product = Product(
-                            productObj.getInt("id_Product"),
-                            productObj.getString("name"),
-                            productObj.getString("description"),
-                            productObj.getDouble("price")
-                        )
-                        products.add(product)
-                    }
-                    _productList.value = products
-                },
-                { _ ->
-                    // Manejar errores
-                })
-
-            queue.add(request)
-        }
+        repository.getProducts(
+            onSuccess = { products ->
+                _productList.value = products
+            },
+            onError = { error ->
+                // Manejar errores
+            }
+        )
     }
 
     override fun onCleared() {
         super.onCleared()
-        appContext = null // Limpiar la referencia al contexto
-        queue.cancelAll(this)
+        repository.cancelAllRequests()
     }
 }

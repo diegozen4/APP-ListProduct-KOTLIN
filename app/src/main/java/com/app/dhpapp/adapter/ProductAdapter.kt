@@ -1,12 +1,15 @@
 package com.app.dhpapp.adapter
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.dhpapp.R
 import com.app.dhpapp.model.Product
+import java.util.*
 
 class ProductAdapter(private var productList: List<Product>, private val listener: OnProductClickListener) :
     RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
@@ -19,6 +22,7 @@ class ProductAdapter(private var productList: List<Product>, private val listene
         val nameTextView: TextView = itemView.findViewById(R.id.textNombre)
         val descriptionTextView: TextView = itemView.findViewById(R.id.textDescripcion)
         val priceTextView: TextView = itemView.findViewById(R.id.textPrecio)
+        val imageView: ImageView = itemView.findViewById(R.id.imageViewProducto)
     }
 
     fun setData(newList: List<Product>) {
@@ -38,6 +42,10 @@ class ProductAdapter(private var productList: List<Product>, private val listene
         holder.nameTextView.text = product.name
         holder.descriptionTextView.text = product.description
         holder.priceTextView.text = "S/. ${product.price}"
+
+        // Decodificar la imagen en base64 y establecerla en el ImageView
+        val decodedImage = Base64.getDecoder().decode(product.image)
+        holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.size))
 
         holder.itemView.setOnClickListener {
             listener.onProductClick(product)

@@ -1,12 +1,14 @@
-package com.app.dhpapp
+package com.app.dhpapp.activities.core
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.app.dhpapp.R
+import com.app.dhpapp.activities.ProductDetailActivity
 import com.app.dhpapp.adapter.ProductAdapter
 import com.app.dhpapp.model.Product
 import com.app.dhpapp.viewmodel.ProductViewModel
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener 
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 2) // Cambio aquí
         adapter = ProductAdapter(emptyList(), this)
         recyclerView.adapter = adapter
 

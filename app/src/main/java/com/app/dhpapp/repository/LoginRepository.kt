@@ -2,7 +2,6 @@ package com.app.dhpapp.repository
 
 import android.content.Context
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.app.dhpapp.BaseApi
@@ -18,12 +17,17 @@ class LoginRepository(private val context: Context) {
                 put("email", user.email)
                 put("password", user.password)
             },
-            { _ ->
-                // Procesar la respuesta del servidor
-                onSuccess.invoke()
+            { response ->
+                val message = response.getString("message")
+                if (message == "success") {
+                    val userJson = response.getJSONObject("user")
+                    val userId = userJson.getInt("id_User")
+                    onSuccess.invoke()
+                } else {
+                    onError.invoke(message)
+                }
             },
             { error ->
-                // Manejar errores de la solicitud
                 onError.invoke(error.message ?: "Error desconocido")
             })
 

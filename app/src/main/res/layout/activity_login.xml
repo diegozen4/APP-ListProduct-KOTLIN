@@ -2,30 +2,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EFEFEF"
     android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/editTextEmail"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/logoImageView"
+        android:background="@drawable/border"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
         android:hint="Email"
+        android:textColor="@color/black"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/border"
         android:layout_below="@id/editTextEmail"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="30dp"
         android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextPassword"
-        android:text="Log In" />
+        android:backgroundTint="#FF9800"
+        android:textStyle="bold"
+        android:text="INGRESAR" />
 
 </RelativeLayout>

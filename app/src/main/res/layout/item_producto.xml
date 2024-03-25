@@ -2,26 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/border"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewProducto"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        /> <!-- Puedes establecer una imagen de marcador de posición aquí -->
 
     <TextView
         android:id="@+id/textNombre"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:hint="nombre"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:hint="descripcion"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textPrecio"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:hint="precio"
+        android:layout_gravity="end"
         android:textSize="16sp" />
 
 </LinearLayout>
