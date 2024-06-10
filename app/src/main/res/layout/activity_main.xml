@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF9800">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FF9800"
+    tools:context=".activities.core.MainActivity">
 
 
     <TextView
@@ -32,5 +34,17 @@
             android:padding="8dp" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        android:src="@android:drawable/ic_input_add"
+        android:scaleType="centerInside"
+        android:backgroundTint="#FF5722"
+        app:tint="@color/white" />
 
 </RelativeLayout>

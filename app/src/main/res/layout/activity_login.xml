@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEFEF"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".activities.auth.LoginActivity">
 
     <ImageView
         android:id="@+id/logoImageView"
@@ -17,38 +19,39 @@
         android:id="@+id/editTextEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/logoImageView"
-        android:background="@drawable/border"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/border"
         android:hint="Email"
-        android:textColor="@color/black"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/black" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editTextEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/border"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border"
-        android:layout_below="@id/editTextEmail"
-        android:layout_marginBottom="30dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextPassword"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="#FF9800"
-        android:textStyle="bold"
-        android:text="INGRESAR" />
+        android:text="INGRESAR"
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activities.core.ProductAddActivity">
+
+    <!-- EditText para el nombre del producto -->
+    <EditText
+        android:id="@+id/editTextProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:hint="Product Name"
+        android:lines="1"
+        android:textColor="#171616"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <!-- EditText para la descripción del producto -->
+    <EditText
+        android:id="@+id/editTextProductDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextProductName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:hint="Product Description"
+        android:lines="1"
+        android:textColor="#272323"
+        android:textSize="20sp" />
+
+    <!-- EditText para el precio del producto -->
+    <EditText
+        android:id="@+id/editTextProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextProductDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:hint="Product Price"
+        android:inputType="numberDecimal"
+        android:textColor="#FF5722"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <!-- ImageButton para cargar imagen -->
+    <ImageButton
+        android:id="@+id/imageButtonUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextProductPrice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@android:drawable/ic_menu_upload" /> <!-- Aquí debes asignar el icono para cargar imágenes -->
+
+    <!-- ImageView para la imagen del producto -->
+    <ImageView
+        android:id="@+id/imageViewProductAdd"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_below="@id/imageButtonUploadImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop" />
+
+    <!-- Botón flotante para limpiar la imagen -->
+    <ImageView
+        android:id="@+id/clearImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageViewProductAdd"
+        android:layout_alignEnd="@id/imageViewProductAdd"
+        android:layout_margin="8dp"
+        android:scaleType="center"
+        android:src="@android:drawable/ic_delete"
+        app:tint="#7A7A7A" />
+
+
+    <!-- Botón de agregar producto -->
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewProductAdd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#009688"
+        android:text="AGREGAR"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+</RelativeLayout>

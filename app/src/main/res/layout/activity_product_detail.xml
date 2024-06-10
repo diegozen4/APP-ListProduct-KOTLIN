@@ -2,18 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/peces_compartamos">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    tools:context=".activities.core.ProductDetailActivity">
 
     <!-- TextView para el nombre del producto -->
     <TextView
         android:id="@+id/textProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Product Name"
         android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"/>
+        android:textStyle="bold" />
 
     <!-- TextView para la descripción del producto -->
     <TextView
@@ -21,10 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textProductName"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:text="Product Description"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="20sp" />
 
     <!-- TextView para el precio del producto -->
     <TextView
@@ -32,12 +34,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textProductDescription"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:textColor="#FF5722"
         android:text="Product Price"
+        android:textColor="#FF5722"
         android:textSize="26sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"/>
+        android:textStyle="bold" />
 
     <!-- ImageView para la imagen del producto -->
     <ImageView
@@ -45,9 +47,9 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_below="@id/textProductPrice"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:scaleType="centerInside"
-        android:layout_centerHorizontal="true"/>
+        android:scaleType="centerInside" />
 
     <!-- Botón de compra -->
     <Button
@@ -55,11 +57,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewProduct"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:textStyle="bold"
+        android:backgroundTint="#009688"
         android:text="COMPRAR"
-        android:backgroundTint="#FF0057"
-        android:textSize="36sp"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <!-- Botón de compra -->
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewProduct"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#FFC107"
+        android:text="Editar"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <!-- Botón de compra -->
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewProduct"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#F44336"
+        android:text="Eliminar"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 </RelativeLayout>

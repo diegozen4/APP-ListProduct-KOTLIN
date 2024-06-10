@@ -9,8 +9,8 @@ import com.app.dhpapp.model.User
 import org.json.JSONObject
 
 class LoginRepository(private val context: Context) {
-    fun loginUser(user: User, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        val url = "${BaseApi.BASE_URL}/apiDhp/POST_Auth.php"
+    fun loginUser(user: User, onSuccess: (User) -> Unit, onError: (String) -> Unit) {
+        val url = "${BaseApi.BASE_URL}POST_Auth.php"
 
         val request = JsonObjectRequest(Request.Method.POST, url,
             JSONObject().apply {
@@ -21,8 +21,11 @@ class LoginRepository(private val context: Context) {
                 val message = response.getString("message")
                 if (message == "success") {
                     val userJson = response.getJSONObject("user")
-                    val userId = userJson.getInt("id_User")
-                    onSuccess.invoke()
+                    val userEmail = userJson.getString("email")
+                    val userRol = userJson.getString("rol")
+
+                    val newUser = User(userEmail, "", userRol)
+                    onSuccess.invoke(newUser)
                 } else {
                     onError.invoke(message)
                 }
@@ -34,3 +37,4 @@ class LoginRepository(private val context: Context) {
         Volley.newRequestQueue(context).add(request)
     }
 }
+

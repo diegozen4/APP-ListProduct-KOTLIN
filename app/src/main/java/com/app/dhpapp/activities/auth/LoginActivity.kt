@@ -36,18 +36,25 @@ class LoginActivity : AppCompatActivity() {
             val email = editTextEmail.text.toString().trim()
             val password = editTextPassword.text.toString().trim()
 
-            val user = User(email, password)
+            val user = User(email, password, "")
             loginViewModel.loginUser(user,
-                onSuccess = {
-                    // Iniciar MainActivity cuando el inicio de sesión sea exitoso
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                onSuccess = { newUser ->
+                    // Mostrar datos del usuario
+                    Toast.makeText(this@LoginActivity, "¡Bienvenido! Tu rol es ${newUser.rol}", Toast.LENGTH_SHORT).show()
+
+                    // Crear el Intent para iniciar MainActivity
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
+                        putExtra("USER_ROL", newUser.rol)
+                    }
+
+                    startActivity(intent)
                     finish() // Finalizar LoginActivity para que el usuario no pueda volver atrás
                 },
                 onError = { error ->
-                    // Mostrar un Toast con el mensaje de error
                     Toast.makeText(this@LoginActivity, "Error: $error", Toast.LENGTH_SHORT).show()
                 }
             )
+
         }
     }
 }

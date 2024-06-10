@@ -29,7 +29,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
             }
         )
     }
-
+    fun addProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        repository.addProduct(product, onSuccess, onError)
+    }
     override fun onCleared() {
         super.onCleared()
         repository.cancelAllRequests()
