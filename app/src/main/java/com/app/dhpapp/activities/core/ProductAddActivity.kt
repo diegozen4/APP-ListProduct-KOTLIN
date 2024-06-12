@@ -84,10 +84,26 @@ class ProductAddActivity : AppCompatActivity() {
     private fun convertImageToBase64(imageUri: Uri): String {
         val inputStream = contentResolver.openInputStream(imageUri)
         val bitmap = BitmapFactory.decodeStream(inputStream)
+        val compressedBitmap = compressImage(bitmap)
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        compressedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
-}
 
+    private fun compressImage(bitmap: Bitmap): Bitmap {
+        var quality = 100
+        var streamLength: Int
+        val byteArrayOutputStream = ByteArrayOutputStream()
+
+        do {
+            byteArrayOutputStream.reset()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream)
+            streamLength = byteArrayOutputStream.size()
+            quality -= 5
+        } while (streamLength >= 50 * 1024 && quality > 0)
+
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    }
+}
