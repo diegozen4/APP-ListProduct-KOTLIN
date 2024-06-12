@@ -2,9 +2,13 @@ package com.app.dhpapp.activities.core
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +26,8 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener 
     private lateinit var adapter: ProductAdapter
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var addProduct: FloatingActionButton
-
+    private lateinit var searchView: androidx.appcompat.widget.SearchView
+    private lateinit var searchEditText: EditText
     private lateinit var viewModel: ProductViewModel
 
     @SuppressLint("MissingInflatedId")
@@ -33,12 +38,14 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener 
         val userRol = intent.getStringExtra("USER_ROL")
 
         recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this, 2) // Cambio aquí
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
         adapter = ProductAdapter(emptyList(), this)
         recyclerView.adapter = adapter
 
         addProduct = findViewById(R.id.addProduct)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        searchView = findViewById(R.id.searchView)
+
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.getProducts()
         }
@@ -60,11 +67,40 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener 
             adapter.setData(products)
             swipeRefreshLayout.isRefreshing = false
         }
+
+        // Set up the search view
+        searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text)
+        searchEditText.setTextColor(
+            ContextCompat.getColor(
+                this, R.color.black
+            )
+        ) // Cambiar el color del texto
+        searchEditText.setHintTextColor(
+            ContextCompat.getColor(
+                this, R.color.gray
+            )
+        ) // Cambiar el color del hint
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                filter(s.toString())
+            }
+        })
+    }
+
+    private fun filter(text: String) {
+        val filteredList = viewModel.productList.value?.filter {
+            it.name.contains(text, true) || it.description.contains(text, true)
+        }
+        filteredList?.let { adapter.setData(it) }
     }
 
     override fun onProductClick(product: Product) {
         val intent = Intent(this, ProductDetailActivity::class.java).apply {
             putExtra("product", product as Serializable)
+            putExtra("USER_ROL", intent.getStringExtra("USER_ROL"))
         }
         startActivity(intent)
     }

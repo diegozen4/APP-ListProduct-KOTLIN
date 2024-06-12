@@ -11,8 +11,7 @@
         android:id="@+id/imageViewProducto"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerInside"
-        /> <!-- Puedes establecer una imagen de marcador de posición aquí -->
+        android:scaleType="fitCenter"/> <!-- Puedes establecer una imagen de marcador de posición aquí -->
 
     <TextView
         android:id="@+id/textNombre"

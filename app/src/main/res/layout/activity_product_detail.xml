@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     tools:context=".activities.core.ProductDetailActivity">
 
     <!-- TextView para el nombre del producto -->
-    <TextView
+    <EditText
         android:id="@+id/textProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Product Name"
+        android:enabled="false"
         android:textSize="36sp"
         android:textStyle="bold" />
 
     <!-- TextView para la descripción del producto -->
-    <TextView
+    <EditText
         android:id="@+id/textProductDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textProductName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
+        android:enabled="false"
         android:text="Product Description"
         android:textSize="20sp" />
 
     <!-- TextView para el precio del producto -->
-    <TextView
+    <EditText
         android:id="@+id/textProductPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,19 +40,44 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:text="Product Price"
+        android:enabled="false"
         android:textColor="#FF5722"
         android:textSize="26sp"
         android:textStyle="bold" />
+
+    <!-- ImageButton para cargar imagen -->
+    <ImageButton
+        android:id="@+id/imageButtonUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textProductPrice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@android:drawable/ic_menu_upload"
+        android:visibility="gone" /> <!-- Aquí debes asignar el icono para cargar imágenes -->
 
     <!-- ImageView para la imagen del producto -->
     <ImageView
         android:id="@+id/imageViewProduct"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_below="@id/textProductPrice"
+        android:layout_below="@id/imageButtonUploadImage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:scaleType="centerInside" />
+        android:scaleType="fitCenter" />
+
+    <!-- Botón flotante para limpiar la imagen -->
+    <ImageView
+        android:id="@+id/clearImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageViewProduct"
+        android:layout_alignEnd="@id/imageViewProduct"
+        android:layout_margin="8dp"
+        android:scaleType="center"
+        android:src="@android:drawable/ic_delete"
+        android:visibility="gone"
+        app:tint="#7A7A7A" />
 
     <!-- Botón de compra -->
     <Button
@@ -67,7 +95,7 @@
 
     <!-- Botón de compra -->
     <Button
-        android:id="@+id/editButton"
+        android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewProduct"
@@ -75,6 +103,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
+        android:backgroundTint="#F44336"
+        android:text="Eliminar"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <!-- Botón de compra -->
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewProduct"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="#FFC107"
         android:text="Editar"
         android:textSize="26sp"
@@ -83,7 +127,23 @@
 
     <!-- Botón de compra -->
     <Button
-        android:id="@+id/deleteButton"
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewProduct"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#F44336"
+        android:text="Cancelar"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <!-- Botón de compra -->
+    <Button
+        android:id="@+id/acceptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewProduct"
@@ -91,8 +151,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#F44336"
-        android:text="Eliminar"
+        android:backgroundTint="#8BC34A"
+        android:text="Aceptar"
         android:textSize="26sp"
         android:textStyle="bold"
         android:visibility="gone" />

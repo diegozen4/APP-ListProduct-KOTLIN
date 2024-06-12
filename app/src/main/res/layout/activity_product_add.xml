@@ -68,7 +68,7 @@
         android:layout_below="@id/imageButtonUploadImage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitCenter" />
 
     <!-- Botón flotante para limpiar la imagen -->
     <ImageView

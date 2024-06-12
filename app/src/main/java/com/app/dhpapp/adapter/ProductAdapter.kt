@@ -11,8 +11,9 @@ import com.app.dhpapp.R
 import com.app.dhpapp.model.Product
 import java.util.*
 
-class ProductAdapter(private var productList: List<Product>, private val listener: OnProductClickListener) :
-    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(
+    private var productList: List<Product>, private val listener: OnProductClickListener
+) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     interface OnProductClickListener {
         fun onProductClick(product: Product)
@@ -31,11 +32,10 @@ class ProductAdapter(private var productList: List<Product>, private val listene
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_producto, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_producto, parent, false)
         return ViewHolder(view)
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = productList[position]
@@ -45,7 +45,11 @@ class ProductAdapter(private var productList: List<Product>, private val listene
 
         // Decodificar la imagen en base64 y establecerla en el ImageView
         val decodedImage = Base64.getDecoder().decode(product.image)
-        holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.size))
+        holder.imageView.setImageBitmap(
+            BitmapFactory.decodeByteArray(
+                decodedImage, 0, decodedImage.size
+            )
+        )
 
         holder.itemView.setOnClickListener {
             listener.onProductClick(product)
