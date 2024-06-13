@@ -59,4 +59,6 @@ class ProductAdapter(
     override fun getItemCount(): Int {
         return productList.size
     }
+
+
 }

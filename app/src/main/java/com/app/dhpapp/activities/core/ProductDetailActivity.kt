@@ -26,7 +26,6 @@ import java.util.Base64
 class ProductDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ProductViewModel
-    private lateinit var product: Product
 
     private lateinit var textProductName: EditText
     private lateinit var textProductDescription: EditText
@@ -35,7 +34,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var buyButton: Button
     private lateinit var editButton: Button
     private lateinit var deleteButton: Button
-    private lateinit var acceptButton: Button
+    private lateinit var saveButton: Button
     private lateinit var cancelButton: Button
     private lateinit var uploadImage: ImageButton
     private lateinit var clearImage: ImageView
@@ -55,7 +54,7 @@ class ProductDetailActivity : AppCompatActivity() {
         buyButton = findViewById(R.id.buyButton)
         editButton = findViewById(R.id.editButton)
         deleteButton = findViewById(R.id.deleteButton)
-        acceptButton = findViewById(R.id.acceptButton)
+        saveButton = findViewById(R.id.saveButton)
         cancelButton = findViewById(R.id.cancelButton)
         uploadImage = findViewById(R.id.imageButtonUploadImage)
         clearImage= findViewById(R.id.clearImage)
@@ -85,13 +84,13 @@ class ProductDetailActivity : AppCompatActivity() {
                 buyButton.visibility = Button.GONE
                 editButton.visibility = Button.VISIBLE
                 deleteButton.visibility = Button.VISIBLE
-                acceptButton.visibility = Button.GONE
+                saveButton.visibility = Button.GONE
                 cancelButton.visibility = Button.GONE
             } else {
                 buyButton.visibility = Button.VISIBLE
                 editButton.visibility = Button.GONE
                 deleteButton.visibility = Button.GONE
-                acceptButton.visibility = Button.GONE
+                saveButton.visibility = Button.GONE
                 cancelButton.visibility = Button.GONE
             }
         }
@@ -115,7 +114,7 @@ class ProductDetailActivity : AppCompatActivity() {
             buyButton.visibility = Button.GONE
             editButton.visibility = Button.GONE
             deleteButton.visibility = Button.GONE
-            acceptButton.visibility = Button.VISIBLE
+            saveButton.visibility = Button.VISIBLE
             cancelButton.visibility = Button.VISIBLE
             uploadImage.visibility = View.VISIBLE
             clearImage.visibility = View.VISIBLE
@@ -123,14 +122,14 @@ class ProductDetailActivity : AppCompatActivity() {
         deleteButton.setOnClickListener {
 
         }
-        acceptButton.setOnClickListener {
+        saveButton.setOnClickListener {
             textProductName.isEnabled = false
             textProductDescription.isEnabled = false
             textProductPrice.isEnabled = false
             buyButton.visibility = Button.GONE
             editButton.visibility = Button.VISIBLE
             deleteButton.visibility = Button.VISIBLE
-            acceptButton.visibility = Button.GONE
+            saveButton.visibility = Button.GONE
             cancelButton.visibility = Button.GONE
             uploadImage.visibility = View.GONE
             clearImage.visibility = View.GONE
@@ -144,7 +143,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
             val product = Product(id, name, description, price, image)
 
-            viewModel.addProduct(product,
+            viewModel.updateProduct(product,
                 onSuccess = {
                     Toast.makeText(this, "Producto agregado correctamente", Toast.LENGTH_SHORT)
                         .show()
@@ -163,7 +162,7 @@ class ProductDetailActivity : AppCompatActivity() {
             buyButton.visibility = Button.GONE
             editButton.visibility = Button.VISIBLE
             deleteButton.visibility = Button.VISIBLE
-            acceptButton.visibility = Button.GONE
+            saveButton.visibility = Button.GONE
             cancelButton.visibility = Button.GONE
             uploadImage.visibility = View.GONE
             clearImage.visibility = View.GONE

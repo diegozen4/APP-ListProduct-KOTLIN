@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Product Name"
+        android:text="Producto"
         android:enabled="false"
         android:textSize="36sp"
         android:textStyle="bold" />
@@ -28,7 +28,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:enabled="false"
-        android:text="Product Description"
+        android:text="Descripcion"
         android:textSize="20sp" />
 
     <!-- TextView para el precio del producto -->
@@ -39,7 +39,7 @@
         android:layout_below="@id/textProductDescription"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:text="Product Price"
+        android:text="Precio"
         android:enabled="false"
         android:textColor="#FF5722"
         android:textSize="26sp"
@@ -54,7 +54,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:src="@android:drawable/ic_menu_upload"
-        android:visibility="gone" /> <!-- Aquí debes asignar el icono para cargar imágenes -->
+        android:visibility="visible" /> <!-- Aquí debes asignar el icono para cargar imágenes -->
 
     <!-- ImageView para la imagen del producto -->
     <ImageView
@@ -76,7 +76,7 @@
         android:layout_margin="8dp"
         android:scaleType="center"
         android:src="@android:drawable/ic_delete"
-        android:visibility="gone"
+        android:visibility="visible"
         app:tint="#7A7A7A" />
 
     <!-- Botón de compra -->
@@ -91,7 +91,7 @@
         android:text="COMPRAR"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <!-- Botón de compra -->
     <Button
@@ -139,11 +139,11 @@
         android:text="Cancelar"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <!-- Botón de compra -->
     <Button
-        android:id="@+id/acceptButton"
+        android:id="@+id/savetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewProduct"
@@ -152,9 +152,9 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
         android:backgroundTint="#8BC34A"
-        android:text="Aceptar"
+        android:text="Guardar"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </RelativeLayout>
