@@ -74,6 +74,37 @@ class ProductRepository(private val application: Application) {
         }
         queue.add(request)
     }
+    fun updateProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        queue = Volley.newRequestQueue(application.applicationContext)
+        val url = "${BaseApi.BASE_URL}UPDATE_Product.php"
+
+        Log.d("ProductRepository", "updateProduct: Sending request to $url with data: $product")
+
+        val params = HashMap<String, String>()
+        params["id"] = product.id.toString()
+        params["name"] = product.name
+        params["description"] = product.description
+        params["price"] = product.price
+        params["image"] = product.image
+
+        val request = object : StringRequest(
+            Method.POST,
+            url,
+            Response.Listener { response ->
+                Log.d("ProductRepository", "updateProduct: Response received - $response")
+                onSuccess.invoke()
+            },
+            Response.ErrorListener { error ->
+                Log.e("ProductRepository", "updateProduct: Error - ${error.message ?: "Unknown error"}")
+                onError.invoke(error.message ?: "Error desconocido")
+            }
+        ) {
+            override fun getParams(): Map<String, String> {
+                return params
+            }
+        }
+        queue.add(request)
+    }
 
     fun cancelAllRequests() {
         queue.cancelAll(this)
