@@ -105,6 +105,33 @@ class ProductRepository(private val application: Application) {
         }
         queue.add(request)
     }
+    fun deleteProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        queue = Volley.newRequestQueue(application.applicationContext)
+        val url = "${BaseApi.BASE_URL}DELETE_Product.php"
+
+        Log.d("ProductRepository", "deleteProduct: Sending request to $url with data: $product")
+
+        val params = HashMap<String, String>()
+        params["id"] = product.id.toString()
+
+        val request = object : StringRequest(
+            Method.POST,
+            url,
+            Response.Listener { response ->
+                Log.d("ProductRepository", "deleteProduct: Response received - $response")
+                onSuccess.invoke()
+            },
+            Response.ErrorListener { error ->
+                Log.e("ProductRepository", "deleteProduct: Error - ${error.message ?: "Unknown error"}")
+                onError.invoke(error.message ?: "Error desconocido")
+            }
+        ) {
+            override fun getParams(): Map<String, String> {
+                return params
+            }
+        }
+        queue.add(request)
+    }
 
     fun cancelAllRequests() {
         queue.cancelAll(this)

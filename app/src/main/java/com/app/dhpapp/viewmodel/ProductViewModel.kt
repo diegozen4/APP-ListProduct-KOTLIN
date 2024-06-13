@@ -36,6 +36,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     fun updateProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit){
         repository.updateProduct(product, onSuccess, onError)
     }
+    fun deleteProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit){
+        repository.deleteProduct(product, onSuccess, onError)
+    }
     override fun onCleared() {
         super.onCleared()
         repository.cancelAllRequests()

@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputFilter
+import android.text.Spanned
 import android.util.Base64
 import android.widget.Button
 import android.widget.EditText
@@ -63,7 +65,7 @@ class ProductAddActivity : AppCompatActivity() {
                 onSuccess = {
                     Toast.makeText(this, "Producto agregado correctamente", Toast.LENGTH_SHORT)
                         .show()
-                    finish()
+                    finish() // Finaliza la actividad después de agregar el producto
                 },
                 onError = { error ->
                     Toast.makeText(this, "Error al agregar el producto: $error", Toast.LENGTH_SHORT)
@@ -106,4 +108,5 @@ class ProductAddActivity : AppCompatActivity() {
         val byteArray = byteArrayOutputStream.toByteArray()
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
+
 }

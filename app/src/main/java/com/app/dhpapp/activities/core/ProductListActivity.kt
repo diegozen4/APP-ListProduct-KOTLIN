@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -14,18 +15,20 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.dhpapp.R
+import com.app.dhpapp.activities.auth.LoginActivity
 import com.app.dhpapp.adapter.ProductAdapter
 import com.app.dhpapp.model.Product
 import com.app.dhpapp.viewmodel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.Serializable
 
-class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener {
+class ProductListActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductAdapter
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var addProduct: FloatingActionButton
+    private lateinit var exit: ImageView
     private lateinit var searchView: androidx.appcompat.widget.SearchView
     private lateinit var searchEditText: EditText
     private lateinit var viewModel: ProductViewModel
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_product_list)
 
         val userRol = intent.getStringExtra("USER_ROL")
 
@@ -45,6 +48,13 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener 
         addProduct = findViewById(R.id.addProduct)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         searchView = findViewById(R.id.searchView)
+        exit = findViewById(R.id.exit)
+
+        exit.setOnClickListener {
+            val intent = Intent(this@ProductListActivity, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
 
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.getProducts()
@@ -58,7 +68,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnProductClickListener 
 
         addProduct.setOnClickListener {
             // Redirecciona a la pantalla ProductAdd
-            val intent = Intent(this@MainActivity, ProductAddActivity::class.java)
+            val intent = Intent(this@ProductListActivity, ProductAddActivity::class.java)
             startActivity(intent)
         }
 

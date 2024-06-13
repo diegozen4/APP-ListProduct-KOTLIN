@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.app.dhpapp.R
-import com.app.dhpapp.activities.core.MainActivity
+import com.app.dhpapp.activities.core.ProductListActivity
 import com.app.dhpapp.model.User
 import com.app.dhpapp.repository.LoginRepository
 import com.app.dhpapp.viewmodel.LoginViewModel
@@ -42,8 +42,8 @@ class LoginActivity : AppCompatActivity() {
                     // Mostrar datos del usuario
                     Toast.makeText(this@LoginActivity, "¡Bienvenido! Tu rol es ${newUser.rol}", Toast.LENGTH_SHORT).show()
 
-                    // Crear el Intent para iniciar MainActivity
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
+                    // Crear el Intent para iniciar ProductListActivity
+                    val intent = Intent(this@LoginActivity, ProductListActivity::class.java).apply {
                         putExtra("USER_ROL", newUser.rol)
                     }
 
