@@ -74,6 +74,7 @@ class ProductRepository(private val application: Application) {
         }
         queue.add(request)
     }
+
     fun updateProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
         queue = Volley.newRequestQueue(application.applicationContext)
         val url = "${BaseApi.BASE_URL}UPDATE_Product.php"
@@ -105,6 +106,7 @@ class ProductRepository(private val application: Application) {
         }
         queue.add(request)
     }
+
     fun deleteProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
         queue = Volley.newRequestQueue(application.applicationContext)
         val url = "${BaseApi.BASE_URL}DELETE_Product.php"

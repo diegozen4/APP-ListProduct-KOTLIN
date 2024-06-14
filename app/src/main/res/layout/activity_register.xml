@@ -5,29 +5,45 @@
     android:layout_height="match_parent"
     android:background="#EFEFEF"
     android:padding="16dp"
-    tools:context=".activities.auth.LoginActivity">
+    tools:context=".activities.auth.RegisterActivity">
 
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOLA BIENVENIDO A"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/logo" />
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:text="SPORT SHOP"
+        android:textSize="40sp"
+        android:textStyle="bold | italic"
+        android:textColor="#FF9800"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"/>
 
     <EditText
+        android:layout_below="@id/title1"
         android:id="@+id/editTextEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logoImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/border"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
+        android:textSize="24sp"
         android:textColor="@color/black" />
 
     <EditText
@@ -39,29 +55,23 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/border"
         android:hint="Password"
+        android:textSize="24sp"
         android:inputType="textPassword"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextPassword"
         android:layout_centerHorizontal="true"
         android:backgroundTint="#FF9800"
-        android:text="INGRESAR"
+        android:layout_marginTop="30dp"
+        android:textSize="27sp"
+        android:text="REGISTRAR"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/registerTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="Registrarse"
-        android:textStyle="bold" />
 
 </RelativeLayout>
