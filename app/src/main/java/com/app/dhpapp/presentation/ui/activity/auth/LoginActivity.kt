@@ -1,4 +1,4 @@
-package com.app.dhpapp.activities.auth
+package com.app.dhpapp.presentation.ui.activity.auth
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,10 +9,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.app.dhpapp.R
-import com.app.dhpapp.activities.core.ProductListActivity
+import com.app.dhpapp.activities.auth.RegisterActivity
+import com.app.dhpapp.domain.repository.LoginRepository
 import com.app.dhpapp.model.User
-import com.app.dhpapp.repository.LoginRepository
-import com.app.dhpapp.viewmodel.LoginViewModel
+import com.app.dhpapp.presentation.ui.activity.ProductListActivity
+import com.app.dhpapp.presentation.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var editTextEmail: EditText

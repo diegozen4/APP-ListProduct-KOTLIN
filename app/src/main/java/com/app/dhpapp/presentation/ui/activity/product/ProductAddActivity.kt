@@ -1,6 +1,5 @@
-package com.app.dhpapp.activities.core
+package com.app.dhpapp.presentation.ui.activity.product
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -8,8 +7,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.InputFilter
-import android.text.Spanned
 import android.util.Base64
 import android.widget.Button
 import android.widget.EditText
@@ -19,8 +16,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.dhpapp.R
-import com.app.dhpapp.model.Product
-import com.app.dhpapp.viewmodel.ProductViewModel
+import com.app.dhpapp.domain.model.Product
+import com.app.dhpapp.presentation.viewmodel.ProductViewModel
 import java.io.ByteArrayOutputStream
 
 class ProductAddActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.app.dhpapp.adapter
+package com.app.dhpapp.presentation.ui.adapter
 
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.dhpapp.R
-import com.app.dhpapp.model.Product
+import com.app.dhpapp.domain.model.Product
 import java.util.*
 
 class ProductAdapter(
@@ -59,6 +59,4 @@ class ProductAdapter(
     override fun getItemCount(): Int {
         return productList.size
     }
-
-
 }

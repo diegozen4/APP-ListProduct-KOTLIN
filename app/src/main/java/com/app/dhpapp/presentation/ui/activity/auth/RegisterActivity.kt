@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.app.dhpapp.R
 import com.app.dhpapp.model.User
+import com.app.dhpapp.presentation.ui.activity.auth.LoginActivity
 import com.app.dhpapp.repository.RegisterRepository
 import com.app.dhpapp.viewmodel.RegisterViewModel
 

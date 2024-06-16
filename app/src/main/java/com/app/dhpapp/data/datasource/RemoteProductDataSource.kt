@@ -1,4 +1,4 @@
-package com.app.dhpapp.repository
+package com.app.dhpapp.data.datasource
 
 import android.app.Application
 import android.util.Log
@@ -8,20 +8,19 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.app.dhpapp.BaseApi
-import com.app.dhpapp.model.Product
+import com.app.dhpapp.data.network.BaseApi
+import com.app.dhpapp.domain.model.Product
 import org.json.JSONObject
 
-class ProductRepository(private val application: Application) {
+class RemoteProductDataSource(private val application: Application) {
 
-    private lateinit var queue: RequestQueue
+    private val queue: RequestQueue = Volley.newRequestQueue(application.applicationContext)
 
     fun getProducts(onSuccess: (List<Product>) -> Unit, onError: (String) -> Unit) {
-        queue = Volley.newRequestQueue(application.applicationContext)
+        val products = mutableListOf<Product>()
         val url = "${BaseApi.BASE_URL}GET_Products.php"
 
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
-            val products = mutableListOf<Product>()
             val productsArray = response.getJSONArray("response")
             for (i in 0 until productsArray.length()) {
                 val productObj = productsArray.getJSONObject(i)
@@ -30,12 +29,11 @@ class ProductRepository(private val application: Application) {
                     productObj.getString("name"),
                     productObj.getString("description"),
                     productObj.getString("price"),
-                    productObj.getString("image") // Agregar la imagen en base64
+                    productObj.getString("image")
                 )
                 products.add(product)
             }
-            Log.d("ProductRepository", "getProducts: Success - Products received: ${products.size}")
-            onSuccess.invoke(products)
+            onSuccess.invoke(products) // Llama a onSuccess con la lista de productos obtenida
         }, { error ->
             Log.e("ProductRepository", "getProducts: Error - ${error.message ?: "Unknown error"}")
             onError.invoke(error.message ?: "Error desconocido")
@@ -44,11 +42,8 @@ class ProductRepository(private val application: Application) {
         queue.add(request)
     }
 
-    fun addProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        queue = Volley.newRequestQueue(application.applicationContext)
+    suspend fun addProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
         val url = "${BaseApi.BASE_URL}ADD_Product.php"
-
-        Log.d("ProductRepository", "addProduct: Sending request to $url with data: $product")
 
         val params = HashMap<String, String>()
         params["name"] = product.name
@@ -75,11 +70,8 @@ class ProductRepository(private val application: Application) {
         queue.add(request)
     }
 
-    fun updateProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        queue = Volley.newRequestQueue(application.applicationContext)
+    suspend fun updateProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
         val url = "${BaseApi.BASE_URL}UPDATE_Product.php"
-
-        Log.d("ProductRepository", "updateProduct: Sending request to $url with data: $product")
 
         val params = HashMap<String, String>()
         params["id"] = product.id.toString()
@@ -107,11 +99,8 @@ class ProductRepository(private val application: Application) {
         queue.add(request)
     }
 
-    fun deleteProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        queue = Volley.newRequestQueue(application.applicationContext)
+    suspend fun deleteProduct(product: Product, onSuccess: () -> Unit, onError: (String) -> Unit) {
         val url = "${BaseApi.BASE_URL}DELETE_Product.php"
-
-        Log.d("ProductRepository", "deleteProduct: Sending request to $url with data: $product")
 
         val params = HashMap<String, String>()
         params["id"] = product.id.toString()
@@ -133,9 +122,5 @@ class ProductRepository(private val application: Application) {
             }
         }
         queue.add(request)
-    }
-
-    fun cancelAllRequests() {
-        queue.cancelAll(this)
     }
 }

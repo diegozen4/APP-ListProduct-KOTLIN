@@ -1,4 +1,4 @@
-package com.app.dhpapp.activities.core
+package com.app.dhpapp.presentation.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.dhpapp.R
-import com.app.dhpapp.activities.auth.LoginActivity
-import com.app.dhpapp.adapter.ProductAdapter
-import com.app.dhpapp.model.Product
-import com.app.dhpapp.viewmodel.ProductViewModel
+import com.app.dhpapp.domain.model.Product
+import com.app.dhpapp.presentation.ui.activity.auth.LoginActivity
+import com.app.dhpapp.presentation.ui.activity.product.ProductAddActivity
+import com.app.dhpapp.presentation.ui.activity.product.ProductDetailActivity
+import com.app.dhpapp.presentation.ui.adapter.ProductAdapter
+import com.app.dhpapp.presentation.viewmodel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.Serializable
 
